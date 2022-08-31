@@ -29,20 +29,10 @@ const MovieDetails = () => {
     
   }, [movieId])
    
-  let genresArray = [];
-  const allGenres=()=> {
-    const { genres } = details;
-    if (genres) {
-       const allgenres = genres.flatMap(genre => genre.name).slice(0, 3).join(", ");
-      genresArray.push(allgenres)
-      return;
-    }
-  }
-  allGenres()
 
   const goBack = () => navigate(from);
 
-  const { original_title, overview, poster_path, vote_average  } = details;
+  const { original_title, overview, poster_path, vote_average, genres } = details;
   const percent = Math.round(vote_average * 10);
     return ( 
       <div>
@@ -55,7 +45,7 @@ const MovieDetails = () => {
           <h2>Overview </h2>
             <p>{overview}</p>
             <h2>Genres </h2>
-           <p >{genresArray}</p> 
+           {genres && genres.flatMap(genre => genre.name).slice(0, 3).join(", ") }
         </MovieInfo>
         </MovieInfoContainer>
         <MoreInfoTitle>Additional information</MoreInfoTitle>
