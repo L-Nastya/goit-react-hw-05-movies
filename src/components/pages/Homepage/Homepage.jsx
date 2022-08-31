@@ -10,10 +10,16 @@ const Homepage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchPopularMovies();
-      setMovies([...result.results])
+      try {
+        const result = await fetchPopularMovies();
+        setMovies([...result.results]);
+      }
+      catch(error) {
+        console.log('error')
     }
-       fetchData();
+    }
+  
+       fetchData();  
 
   },[])
 

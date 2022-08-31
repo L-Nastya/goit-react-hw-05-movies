@@ -6,7 +6,7 @@ import { BsArrowLeft } from 'react-icons/bs';
 
 
 const MovieDetails = () => {
-    const [details, setDetails] = useState({});
+  const [details, setDetails] = useState({});
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,12 +17,16 @@ const MovieDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchMovieDetails(movieId);
-      
-      setDetails(result)
+      try {
+        const result = await fetchMovieDetails(movieId);
+        setDetails(result);
+      }
+      catch (error){
+        console.log('error')
+      }
     }
     fetchData();
-
+    
   }, [movieId])
    
   let genresArray = [];

@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from "services/api";
 import SearchForm from "../SearchForm/SearchForm";
 import MovieList from "../MovieList/MovieList";
-
+import Notiflix from 'notiflix';
 
 const Movies = () => {
     const [movies, setMovies] = useState([]);  
@@ -19,14 +19,17 @@ const Movies = () => {
 
 useEffect(() => {
     const fetchData = async () => {
+        try {
         const result = await fetchSearchMovies(text);
-        console.log(result.results)
-      
-      setMovies(result.results)
+        setMovies(result.results);
        if (result.results.length === 0) {
-    alert("Matches not find")
-    return
+       Notiflix.Notify.failure('No matches found');
+           return;
   }
+        }
+        catch(error) {
+            console.log('error')
+      }
   }
   if (text) {
      fetchData();

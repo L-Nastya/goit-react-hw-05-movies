@@ -1,5 +1,6 @@
 import { React } from "react";
 import { useState } from "react";
+import Notiflix from 'notiflix';
 import styled from "styled-components";
 
 
@@ -15,7 +16,10 @@ const SearchForm = ({onSubmit}) => {
 
   const textSubmit = event => {
     event.preventDefault();
-
+   if (text.trim() === "") {
+      Notiflix.Notify.warning('Fill the line');
+      return;
+    }
     onSubmit(text);
     setText('');
   };

@@ -9,13 +9,18 @@ const Reviews = () => {
     console.log(movieId)
    
     useEffect(() => {
-    const fetchData = async () => {
-        const result = await fetchMovieReviews(movieId);
-        console.log(result.results)
-      
-      setReviews(result.results)
+        const fetchData = async () => {
+            try {
+              const result = await fetchMovieReviews(movieId);
+              setReviews(result.results);
+            }
+            catch(error) {
+                console.log('error');
+            }
+        }
+         if(movieId){
+            fetchData(); 
     }
-    fetchData();
 
     }, [movieId])
 
